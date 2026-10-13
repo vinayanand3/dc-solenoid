@@ -23,6 +23,8 @@ node scripts/capture.mjs solenoid.html --out shot.png
 node scripts/lines.mjs solenoid.html --out lines.png    # every drawn line must end on something
 ```
 
+GitHub Pages serves the `gh-pages` branch. After rebuilding, commit to `main` and run `git push origin main:gh-pages` to update the live pages.
+
 ## Files
 
 | File | What it is |
