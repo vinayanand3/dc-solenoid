@@ -1,0 +1,44 @@
+<section class="panel fig2" id="fig2">
+  <div class="phead"><h2>7 · Automotive application: a solenoid-driven locking pin</h2><p>The same solenoid, built push-type: a rod through its pole drives either a hardened pin into holes in a lock ring, or, through a shift fork, a dog collar whose teeth mesh with teeth on the ring, which is closer to how an electronic locker works. The collar slides on a splined hub fixed to the housing, so engaging it locks the ring. Energize to engage, spring to release. All dimensions and loads are illustrative.</p></div>
+  <div class="fig2-grid">
+    <div class="fig2-main">
+      __CARD2__
+      <div class="transport">
+        <button type="button" class="energize" data-act2="energize" aria-pressed="false"><span class="dot"></span><span class="lbl">Energize lock</span></button>
+        <button type="button" class="tbtn wide" data-act2="reset">Reset</button>
+        <label class="speed"><span>Playback</span><select data-act2="speed"><option value="0.02">×1/50</option><option value="0.0833" selected>×1/12</option><option value="0.25">×1/4</option><option value="1">real time</option></select></label>
+      </div>
+      <div class="mech" role="group" aria-label="Mechanism"><span>Mechanism</span><button type="button" data-mech-btn="pin" aria-pressed="true">Pin in holes</button><button type="button" data-mech-btn="dog" aria-pressed="false">Dog clutch</button></div>
+      <div class="scen" role="group" aria-label="Scenario"></div>
+      <div class="scen-text"></div>
+    </div>
+    <aside class="fig2-side">
+      <div class="status status2" data-status="rest"><span class="sdot"></span><span>Disengaged</span></div>
+      <div class="readouts">
+        <div><span data-l2 data-pin="Pin travel" data-dog="Collar travel">Pin travel</span><b data-r2="pin">0.00 mm</b></div>
+        <div><span data-l2 data-pin="Pin tip" data-dog="Collar teeth">Pin tip</span><b data-r2="depth">1.20 mm clear</b></div>
+        <div><span data-l2 data-pin="Hole offset" data-dog="Tooth offset">Hole offset</span><b data-r2="err">0.00 mm</b></div>
+        <div><span>Ring speed</span><b data-r2="ring">0 rpm</b></div>
+        <div><span data-l2 data-pin="Pin shear" data-dog="Tooth load">Pin shear</span><b data-r2="shear">0.00 kN</b></div>
+        <div><span data-l2 data-pin="Pin friction μ·F" data-dog="Collar friction μ·F">Pin friction μ·F</span><b data-r2="fric">0 N</b></div>
+        <div><span>Spring force</span><b data-r2="spring">3.0 N</b></div>
+        <div><span>Coil current</span><b data-r2="i">0.00 A</b></div>
+      </div>
+      <div class="plots">
+        <svg class="plot2" viewBox="0 0 420 186" role="img" aria-label="Pin depth and hole offset against time"></svg>
+        <p class="pcap"><span class="key s-x"></span>pin tip past the ring face (negative: clearance) &nbsp;<span class="key s-f"></span>offset of the nearest hole from the pin. The pin can enter only while the offset is inside the capture window.</p>
+      </div>
+      <div class="sliders sliders2">
+        <label class="sl"><span class="sl-top"><span>Ring speed difference</span><output data-v2="rpm"></output></span><input type="range" min="0" max="40" step="1" data-p2="rpm"></label>
+        <label class="sl"><span class="sl-top"><span>Drive torque on the ring</span><output data-v2="torque"></output></span><input type="range" min="0" max="400" step="10" data-p2="torque"></label>
+        <label class="sl"><span class="sl-top"><span>Friction coefficient μ</span><output data-v2="mu"></output></span><input type="range" min="0.05" max="0.3" step="0.01" data-p2="mu"></label>
+        <label class="sl"><span class="sl-top"><span>Supply voltage</span><output data-v2="V"></output></span><input type="range" min="6" max="24" step="0.5" data-p2="V"></label>
+      </div>
+    </aside>
+  </div>
+  <div class="fig2-notes">
+    <div><h3>Who carries the torque</h3><p>The solenoid is an actuator, not a structural part. Once the pin is in, the ring's torque T reaches the housing through the pin in shear, F = T / r (here r = 35 mm, so 250 N·m is about 7 kN on the pin), and through its bore. The solenoid's few newtons only move and hold the pin. With the dog clutch the same torque is shared by the flanks of twelve teeth (the readout shows the total tangential load, T / r), which is why production lockers use dog teeth or a locking collar sized for the axle's torque rather than a single pin.</p></div>
+    <div><h3>What decides whether it engages</h3><p><b>Alignment:</b> a hole (or a tooth gap) must come within the capture window, the clearance plus the chamfer: 2.2 mm for the pin, 2.8 mm for the 12-tooth dog clutch, whose teeth fill 40 % of the pitch. <b>Force:</b> magnetic force at the open gap must beat preload and friction. <b>Friction and contamination</b> raise the force needed. <b>Tolerance stack-up</b> in the bracket, bore, pin and ring positions eats into the clearance and the stroke: too little and the pin can't find the hole, too much and it engages shallow. <b>Speed difference:</b> too fast and the pin skates over the holes or catches only a corner.</p></div>
+    <div><h3>What this model leaves out</h3><p>The ring is driven at a set speed with a set torque, not by a vehicle model. Impacts between pin and hole edge, wear, chamfer cam forces and backlash are not simulated; the chamfer is a capture window. Pin friction is μ times the shear force. These are illustrative numbers, not a real locker's specification.</p></div>
+  </div>
+</section>

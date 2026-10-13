@@ -1,0 +1,157 @@
+<header class="hd">
+  <p class="kicker">Anatomy · electromechanics</p>
+  <h1>Inside a Solenoid</h1>
+  <p class="sub">From electricity to mechanical motion</p>
+  <p class="lede">A spring-return DC pull solenoid on a test bench, cut in half along its axis. Switch the coil on and watch the current build against the coil's inductance, flux close through the iron, and the plunger snap toward the pole as the air gap shrinks. Every number, plot and movement below comes from one lumped physical model; the notes at the end say exactly what is idealized.</p>
+</header>
+
+<section class="lab">
+  <div class="lab-main">
+    <div class="modes" role="tablist" aria-label="View">
+      <button type="button" role="tab" data-mode="whole">1 · Assembly</button>
+      <button type="button" role="tab" data-mode="cut" aria-selected="true">2 · Section</button>
+      <button type="button" role="tab" data-mode="explode">3 · Exploded</button>
+      <button type="button" role="tab" data-mode="flux">4 · Magnetic</button>
+      <button type="button" role="tab" data-mode="circuit">5 · Electrical</button>
+      <button type="button" role="tab" data-mode="force">6 · Force &amp; motion</button>
+      <button type="button" role="tab" data-mode="auto">7 · Automotive</button>
+    </div>
+    __FIG1__
+    <div class="transport">
+      <button type="button" class="energize" data-act="energize" aria-pressed="false"><span class="dot"></span><span class="lbl">Energize</span></button>
+      <div class="tgroup">
+        <button type="button" class="tbtn" data-act="play" aria-label="Pause" title="Play / pause">❚❚</button>
+        <button type="button" class="tbtn" data-act="step" aria-label="Single step" title="Advance 0.2 ms">▸|</button>
+        <button type="button" class="tbtn" data-act="reset" aria-label="Reset simulation" title="Reset simulation">↺</button>
+      </div>
+      <label class="speed"><span>Playback</span><input type="range" min="0" max="100" value="48.5" data-act="speed" aria-label="Playback speed"><output data-out="speed">×1/50</output></label>
+      <label class="chk"><input type="checkbox" data-act="slow"> Slow motion</label>
+      <label class="chk"><input type="checkbox" data-act="auto" checked> Auto cycle</label>
+      <div class="tgroup zoom">
+        <button type="button" class="tbtn" data-act="zoom-out" aria-label="Zoom out">−</button>
+        <button type="button" class="tbtn" data-act="zoom-in" aria-label="Zoom in">+</button>
+        <button type="button" class="tbtn wide" data-act="fit" title="Fit the whole bench">Fit</button>
+        <button type="button" class="tbtn wide" data-act="view" title="Back to this view's camera">View</button>
+      </div>
+    </div>
+    <p class="note2d">The drawing is a fixed isometric camera, not a 3D model: views switch between camera presets, and you can zoom and pan, but it does not orbit.</p>
+    <div class="chain" aria-label="Energy conversion">
+      <div class="chip" data-stage="source"><b>Electrical source</b><span data-e="supply">0 mJ in</span></div>
+      <div class="chip" data-stage="winding"><b>Current in winding</b><span data-e="copper">0 mJ heat</span></div>
+      <div class="chip" data-stage="field"><b>Magnetic field</b><span data-e="mag">0 mJ stored</span></div>
+      <div class="chip" data-stage="force"><b>Force on armature</b><span data-e="force">0 N</span></div>
+      <div class="chip" data-stage="motion"><b>Plunger moves</b><span data-e="x">0.00 mm</span></div>
+      <div class="chip" data-stage="work"><b>Work on spring + load</b><span data-e="work">0 mJ</span></div>
+      <div class="chip" data-stage="loss"><b>Dissipation &amp; return</b><span data-e="loss">0 mJ</span></div>
+    </div>
+    <p class="chain-note">The plunger is pulled because moving it shortens the air gap, the part of the iron loop with by far the most reluctance; the field does work as the reluctance falls. Nothing is "pushed" by electrons hitting it. Energy figures are for the current cycle and reset when you energize.</p>
+  </div>
+
+  <aside class="lab-side">
+    <div class="status" data-status="rest"><span class="sdot"></span><span data-out="status">De-energized · at rest</span></div>
+    <div class="readouts">
+      <div><span>Applied voltage</span><b data-r="V">0.0 V</b></div>
+      <div><span>Coil current</span><b data-r="i">0.000 A</b></div>
+      <div><span>Input power</span><b data-r="P">0.0 W</b></div>
+      <div><span>Gap flux density</span><b data-r="B">0.00 T</b></div>
+      <div><span>Magnetic force</span><b data-r="F">0.00 N</b></div>
+      <div><span>Spring force</span><b data-r="Fs">0.00 N</b></div>
+      <div><span>Net force</span><b data-r="Fn">0.00 N</b></div>
+      <div><span>Plunger travel</span><b data-r="x">0.00 mm</b></div>
+      <div><span>Air gap</span><b data-r="g">2.50 mm</b></div>
+      <div><span>Drain voltage</span><b data-r="Vds">12.0 V</b></div>
+      <div><span>Coil temperature</span><b data-r="T">20 °C</b></div>
+      <div><span>Coil resistance</span><b data-r="Rc">12.0 Ω</b></div>
+    </div>
+    <div class="plots">
+      <div class="ptabs" role="tablist" aria-label="Plot">
+        <button type="button" data-plot="it" aria-selected="true">i(t)</button>
+        <button type="button" data-plot="xt">x(t)</button>
+        <button type="button" data-plot="fg">F–gap</button>
+        <button type="button" data-plot="fi">F–i</button>
+        <button type="button" data-plot="sx">Spring</button>
+        <button type="button" data-plot="nx">Net</button>
+        <button type="button" data-plot="tt">Heat</button>
+      </div>
+      <svg class="plot" viewBox="0 0 420 250" role="img" aria-label="Plot"></svg>
+      <p class="pcap" data-out="pcap"></p>
+    </div>
+    <div class="schem-wrap">
+      <svg class="schem" viewBox="0 0 420 172" role="img" aria-label="Drive circuit"></svg>
+      <p class="pcap" data-out="scap"></p>
+    </div>
+  </aside>
+</section>
+
+<section class="panel params">
+  <div class="phead"><h2>Parameters</h2><p>Illustrative defaults, not a datasheet. Turns and resistance are independent here; in a real coil that fills a fixed winding window, resistance grows roughly with the square of the turns.</p><button type="button" class="ghost" data-act="defaults">Reset to defaults</button></div>
+  <div class="sliders"></div>
+  <div class="choices">
+    <label>Pole face <select data-p="face"><option value="flat" selected>Flat</option><option value="cone60">60° cone</option><option value="cone45">45° cone</option></select></label>
+    <label>Pole area <select data-p="pole"><option value="10">Ø10 mm · 79 mm²</option><option value="12">Ø12 mm · 113 mm²</option><option value="14">Ø14 mm · 154 mm²</option><option value="16" selected>Ø16 mm · 201 mm²</option></select></label>
+    <label>Flyback path <select data-p="flyback"><option value="diode" selected>Diode (slow decay)</option><option value="clamp">Diode + 33 V clamp (fast decay)</option><option value="none">None (avalanche, fault)</option></select></label>
+    <label class="chk"><input type="checkbox" data-p="peakHold" checked> Peak &amp; hold: full voltage until seated, then the duty</label>
+    <label class="chk"><input type="checkbox" data-p="sat"> Iron saturation (advanced)</label>
+    <label class="chk"><input type="checkbox" data-p="reverse"> Reverse winding sense</label>
+    <label class="chk"><input type="checkbox" data-act="heat"> Coil self-heating (time-lapse: 1 s = 2 min)</label>
+    <button type="button" class="ghost" data-act="soak">Run the hot-coil demo</button>
+  </div>
+  <div class="warn" data-out="warn" hidden></div>
+</section>
+
+<section class="panel faults">
+  <div class="phead"><h2>Failure modes</h2><p>Pick a fault, then energize. Each one changes the model the way the physical cause would.</p></div>
+  <div class="fault-list" role="radiogroup" aria-label="Fault"></div>
+  <div class="fault-card" data-out="fault"></div>
+</section>
+
+<section class="panel learn">
+  <div class="phead"><h2>Walk through it</h2><p>Ten short steps. Each sets the bench up to show the point.</p></div>
+  <ol class="steps"></ol>
+  <div class="step-card">
+    <div class="step-text"></div>
+    <div class="step-nav"><button type="button" class="ghost" data-act="prev">Back</button><button type="button" class="primary" data-act="show">Show me</button><button type="button" class="ghost" data-act="next">Next</button></div>
+  </div>
+</section>
+
+__FIG2__
+
+<section class="panel theory">
+  <div class="phead"><h2>The equations behind it</h2><p>Tagged by how far to trust them: <span class="tag exact">exact principle</span> <span class="tag ideal">idealized approximation</span> <span class="tag illus">illustrative</span></p></div>
+  <details open><summary>Electrical: Faraday's law for the coil <span class="tag exact">exact principle</span></summary>
+    <p class="eq">V = R·i + dλ/dt</p>
+    <p>λ is the flux linkage, N·Φ. It depends on both the current and the plunger position, λ(i, x), so a moving plunger adds a speed term: dλ/dt = (∂λ/∂i)·di/dt + (∂λ/∂x)·dx/dt. That second term is why the current dips while the plunger travels, a dip drivers use to confirm motion.</p>
+    <p>With the plunger held still and the iron linear, λ = L·i and this becomes <span class="eqi">V = R·i + L·di/dt</span>, so after switch-on <span class="eqi">i(t) = (V/R)(1 − e<sup>−t/τ</sup>)</span>, τ = L/R. The current cannot jump to V/R because the field's energy, ½·L·i², has to be supplied first.</p>
+    <p>The simulation integrates λ directly (implicit Euler, 5 µs steps) and gets i from the magnetic circuit, so inductance changing with gap and saturation is handled without a separate L.</p>
+  </details>
+  <details><summary>Magnetic circuit: Ampère's law, reluctance <span class="tag ideal">idealized approximation</span></summary>
+    <p class="eq">N·i ≈ Φ·(ℛ<sub>gap</sub> + ℛ<sub>iron</sub>),&nbsp; ℛ = ℓ/(μ·A)</p>
+    <p>The coil's magnetomotive force N·i drives flux Φ round the closed loop: pole → working gap → plunger → front plate → can → back plate → pole. Iron has μ<sub>r</sub> in the thousands, so 90 mm of iron here adds the same reluctance as about 0.04 mm of air. The gap dominates, which is why closing it raises the flux so sharply.</p>
+    <p class="eq">B ≈ μ<sub>0</sub>·N·i / g<sub>eff</sub>,&nbsp; g<sub>eff</sub> = g + 0.30 mm + ℓ<sub>iron</sub>/μ<sub>r</sub></p>
+    <p>g<sub>eff</sub> is an effective total gap for this simplified loop, not the visible gap alone: it lumps the sleeve's radial gap and joints (0.30 mm, illustrative) and the iron path. Assumptions: no saturation (unless you enable it), no leakage or fringing, the same effective area A all round the loop.</p>
+    <p><b>Saturation (advanced).</b> Real soft iron flattens out near 1.5 to 2 T. With saturation on, the iron follows B = B<sub>s</sub>·tanh(μ<sub>0</sub>μ<sub>r</sub>H / B<sub>s</sub>) with B<sub>s</sub> = 1.6 T, so neither flux nor force can keep growing as the gap closes or the current rises. With it off, the page warns whenever the ideal B passes about 1.5 T.</p>
+  </details>
+  <details><summary>Force on the plunger <span class="tag ideal">idealized approximation</span></summary>
+    <p class="eq">F<sub>mag</sub> = B²·A / (2μ<sub>0</sub>) &nbsp;⇒&nbsp; F<sub>mag</sub> ≈ μ<sub>0</sub>·N²·i²·A / (2·g<sub>eff</sub>²)</p>
+    <p>The first form (Maxwell stress on a uniform gap) also equals −∂W/∂x at constant flux linkage, so it holds with saturation; the second is the constant-current form for linear iron and one dominant uniform gap. It is an educational approximation, not a sizing equation: real force-stroke curves depend on pole shape (conical poles flatten the curve), leakage, fringing, saturation, coil heating and the drive circuit. The force always pulls toward a smaller gap, whichever way the current flows, because it goes as B².</p>
+    <p class="eq">F<sub>spring</sub> = F<sub>preload</sub> + k·x &nbsp;&nbsp; F<sub>net</sub> = F<sub>mag</sub> − F<sub>spring</sub> − F<sub>load</sub> − F<sub>friction</sub> &nbsp;&nbsp; m·ẍ = F<sub>net</sub> − c·ẋ</p>
+    <p>x is plunger travel, positive toward the pole (pull-in). The ribbon load is a constant-force spring, so F<sub>load</sub> doesn't change with stroke; its drum's inertia is ignored. Friction is Coulomb (0.4 N static, 0.3 N sliding, illustrative) and c = 2 N·s/m. Both stops are hard, with a restitution of 0.2, so the plunger bounces slightly but never passes through a part.</p>
+  </details>
+  <details><summary>Switching off: flyback and release <span class="tag exact">exact principle</span></summary>
+    <p>When the MOSFET opens, the coil keeps its current flowing and its voltage reverses until something conducts. A plain diode clamps the coil at about −0.8 V, so the current decays slowly (τ ≈ L/R) and the flux holds the plunger for many milliseconds. A diode in series with a 33 V clamp lets the coil swing to about −34 V: the current, the flux and the force collapse several times faster and the plunger releases sooner, at the price of a drain voltage of V + 34 V the MOSFET must be rated for. With no flyback path the drain avalanches at its breakdown voltage; release is fast but every turn-off dumps the field's energy into the MOSFET.</p>
+    <p>Electrical decay and mechanical return are separate events: the spring only starts the plunger back once the falling magnetic force drops below the spring force plus load.</p>
+  </details>
+  <details><summary>Drive: PWM and peak-and-hold <span class="tag illus">illustrative</span></summary>
+    <p>Duty cycle here is the PWM duty of the MOSFET, modelled as an average voltage d·V (with diode freewheeling in the off time). The PWM period is assumed much shorter than L/R. With peak-and-hold on, the coil gets full voltage to pull in, then the duty to hold: a seated plunger has a tiny gap and needs little current, so hold power and heating drop sharply.</p>
+  </details>
+</section>
+
+<section class="panel honesty">
+  <div class="phead"><h2>What is simulated and what is drawn</h2></div>
+  <ul>
+    <li><b>Simulated (one model, every number):</b> coil current with inductance that changes with gap; flux linkage, flux density and force from the lumped magnetic circuit; optional iron saturation; the three flyback paths and drain voltage; PWM averaging and peak-and-hold; spring, constant load, Coulomb friction, damping, hard stops; the energy ledger; the fault cases; the lock-pin contact in Fig 2.</li>
+    <li><b>Idealized:</b> one uniform working gap with no leakage or fringing; a fixed parasitic gap; one effective area round the loop; no eddy currents in the iron; no hysteresis or remanence (the flux returns to zero when the current does); coil temperature is a setting, not a thermal simulation.</li>
+    <li><b>Illustrative only:</b> flux lines are schematic paths whose opacity follows the computed B, not FEA field plots; the fringing arcs at the gap; the current-flow dots on the wires; the wire ends in the cut winding (drawn larger than a real 600-turn coil's wire); force arrows are scaled for legibility; the drawing keeps the Ø16 mm geometry when you pick a smaller pole area.</li>
+    <li>No values here are measured data or a real part's specification, and nothing implies compliance with any standard.</li>
+  </ul>
+</section>
